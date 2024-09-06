@@ -40,7 +40,7 @@ const resources = {
 i18n.use(initReactI18next).init({
   resources,
   fallbackLng: "en",
-  lng: "en", // 添加这一行，强制设置默认语言为英语
+  lng: "en",
   interpolation: {
     escapeValue: false,
   },

@@ -24,7 +24,6 @@ type LoaderData = {
 
 export const loader: LoaderFunction = async ({ request }) => {
   const theme = await getThemeFromCookie(request);
-  // 移除语言检测，总是返回英语作为默认语言
   return json<LoaderData>({ theme: theme as Theme, language: "en" });
 };
 
@@ -56,7 +55,6 @@ export function Layout() {
   const data = useLoaderData<LoaderData>();
 
   useEffect(() => {
-    // 确保在客户端设置语言为英语
     if (typeof window !== "undefined") {
       i18n.changeLanguage("en");
     }
