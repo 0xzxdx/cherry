@@ -17,6 +17,7 @@ const resources = {
       chinese: "Chinese",
       copy: "Copy",
       swapLanguages: "Swap languages",
+      copied: "Copied",
     },
   },
   zh: {
@@ -33,6 +34,7 @@ const resources = {
       chinese: "中文",
       copy: "复制",
       swapLanguages: "互换语言",
+      copied: "已复制",
     },
   },
 };

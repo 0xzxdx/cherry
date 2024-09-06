@@ -13,6 +13,7 @@ import {
   SunIcon,
   ArrowRightIcon,
   WidthIcon,
+  ClipboardIcon,
 } from "@radix-ui/react-icons";
 import { useTheme } from "~/components/theme-provider";
 import { useTranslation } from "react-i18next";
@@ -43,6 +44,7 @@ export default function Index() {
   const [inputText, setInputText] = useState("");
   const [model, setModel] = useState("GPT-4o");
   const [translatedText, setTranslatedText] = useState("");
+  const [isCopied, setIsCopied] = useState(false);
   const fetcher = useFetcher<FetcherData>();
 
   const toggleLanguage = () => {
@@ -77,6 +79,29 @@ export default function Index() {
         encType: "application/json",
       }
     );
+  };
+
+  const handlePaste = async () => {
+    try {
+      const text = await navigator.clipboard.readText();
+      if (text.length <= 5000) {
+        setInputText(text);
+      } else {
+        setInputText(text.slice(0, 5000));
+      }
+    } catch (err) {
+      console.error("Failed to read clipboard contents: ", err);
+    }
+  };
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(translatedText);
+      setIsCopied(true);
+      setTimeout(() => setIsCopied(false), 2000);
+    } catch (err) {
+      console.error("Failed to copy text: ", err);
+    }
   };
 
   useEffect(() => {
@@ -143,6 +168,9 @@ export default function Index() {
                 </Select>
               </div>
               <div className="flex space-x-2">
+                <Button variant="ghost" size="sm" onClick={handlePaste}>
+                  <ClipboardIcon className="h-4 w-4" />
+                </Button>
                 <Button variant="ghost" size="sm" onClick={swapLanguages}>
                   <WidthIcon className="h-4 w-4" />
                 </Button>
@@ -192,8 +220,9 @@ export default function Index() {
                   <SelectItem value="zh">{t("chinese")}</SelectItem>
                 </SelectContent>
               </Select>
-              <Button variant="ghost" size="sm">
-                {t("copy")}
+              <Button variant="ghost" size="sm" onClick={handleCopy}>
+                {isCopied ?? <ClipboardIcon className="h-4 w-4 mr-2" />}
+                {isCopied ? t("copied") : t("copy")}
               </Button>
             </div>
             <Textarea
