@@ -21,13 +21,7 @@ import { useState, useEffect } from "react";
 import { useFetcher } from "@remix-run/react";
 
 export const meta: MetaFunction = () => {
-  return [
-    { title: "Translate | Online Translation Tool" },
-    {
-      name: "description",
-      content: "Simple and efficient online translation tool",
-    },
-  ];
+  return [{ title: "Translate | Online Translation Tool" }];
 };
 
 type FetcherData = {

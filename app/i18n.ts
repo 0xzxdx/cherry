@@ -5,8 +5,6 @@ import LanguageDetector from "i18next-browser-languagedetector";
 const resources = {
   en: {
     translation: {
-      metaTitle: "Translate | Online Translation Tool",
-      metaDescription: "Simple and efficient online translation tool",
       translate: "Translate",
       selectSourceLang: "Select source language",
       selectTargetLang: "Select target language",
@@ -22,8 +20,6 @@ const resources = {
   },
   zh: {
     translation: {
-      metaTitle: "翻译 | 在线翻译工具",
-      metaDescription: "简单高效的在线翻译工具",
       translate: "翻译",
       selectSourceLang: "选择源语言",
       selectTargetLang: "选择目标语言",
