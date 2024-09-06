@@ -10,37 +10,51 @@ import {
 } from "~/components/ui/select";
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
 import { useTheme } from "~/components/theme-provider";
+import { useTranslation } from "react-i18next";
+import { useState } from "react";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "翻译 | Translate" },
+    { title: "Translate | Online Translation Tool" },
     {
       name: "description",
-      content:
-        "简单高效的在线翻译工具 | Simple and efficient online translation tool",
+      content: "Simple and efficient online translation tool",
     },
   ];
 };
 
 export default function Index() {
   const { theme, setTheme } = useTheme();
+  const { t, i18n } = useTranslation();
+  const [currentLanguage, setCurrentLanguage] = useState("en"); // 将初始值设置为 "en"
+
+  const toggleLanguage = () => {
+    const newLang = currentLanguage === "en" ? "zh" : "en";
+    i18n.changeLanguage(newLang);
+    setCurrentLanguage(newLang);
+  };
 
   return (
     <div className="min-h-screen bg-background text-foreground">
       <nav className="border-b">
         <div className="container mx-auto px-4 py-2 flex justify-between items-center">
-          <h1 className="text-xl font-bold">翻译 | Translate</h1>
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-          >
-            {theme === "light" ? (
-              <MoonIcon className="h-5 w-5" />
-            ) : (
-              <SunIcon className="h-5 w-5" />
-            )}
-          </Button>
+          <h1 className="text-xl font-bold">{t("translate")}</h1>
+          <div className="flex items-center space-x-2">
+            <Button variant="ghost" size="icon" onClick={toggleLanguage}>
+              {currentLanguage === "en" ? "中" : "En"}
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+            >
+              {theme === "light" ? (
+                <MoonIcon className="h-5 w-5" />
+              ) : (
+                <SunIcon className="h-5 w-5" />
+              )}
+            </Button>
+          </div>
         </div>
       </nav>
 
@@ -49,17 +63,16 @@ export default function Index() {
           <div>
             <Select>
               <SelectTrigger className="w-full">
-                <SelectValue placeholder="选择源语言" />
+                <SelectValue placeholder={t("selectSourceLang")} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="en">英语</SelectItem>
-                <SelectItem value="zh">中文</SelectItem>
-                {/* 添加更多语言选项 */}
+                <SelectItem value="en">{t("english")}</SelectItem>
+                <SelectItem value="zh">{t("chinese")}</SelectItem>
               </SelectContent>
             </Select>
             <Textarea
               className="mt-2"
-              placeholder="在此输入要翻译的文本"
+              placeholder={t("inputPlaceholder")}
               rows={10}
             />
           </div>
@@ -67,17 +80,16 @@ export default function Index() {
           <div>
             <Select>
               <SelectTrigger className="w-full">
-                <SelectValue placeholder="选择目标语言" />
+                <SelectValue placeholder={t("selectTargetLang")} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="en">英语</SelectItem>
-                <SelectItem value="zh">中文</SelectItem>
-                {/* 添加更多语言选项 */}
+                <SelectItem value="en">{t("english")}</SelectItem>
+                <SelectItem value="zh">{t("chinese")}</SelectItem>
               </SelectContent>
             </Select>
             <Textarea
               className="mt-2"
-              placeholder="翻译结果将显示在这里"
+              placeholder={t("outputPlaceholder")}
               rows={10}
               readOnly
             />
@@ -85,7 +97,7 @@ export default function Index() {
         </div>
 
         <div className="mt-4 text-center">
-          <Button>翻译</Button>
+          <Button>{t("translateButton")}</Button>
         </div>
       </main>
     </div>
