@@ -5,7 +5,10 @@ export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
   const theme = formData.get("theme");
 
-  if (typeof theme !== "string") {
+  if (
+    typeof theme !== "string" ||
+    !["light", "dark", "system"].includes(theme)
+  ) {
     return json({ success: false }, { status: 400 });
   }
 

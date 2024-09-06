@@ -51,7 +51,7 @@ export function ThemeProvider({
       setTheme(newTheme);
       fetcher.submit(
         { theme: newTheme },
-        { method: "post", action: "/set-theme" }
+        { method: "post", action: "/api/theme" }
       );
     },
   };
