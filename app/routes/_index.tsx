@@ -19,6 +19,7 @@ import { useTheme } from "~/components/theme-provider";
 import { useTranslation } from "react-i18next";
 import { useState, useEffect } from "react";
 import { useFetcher } from "@remix-run/react";
+import { LANGUAGE_OPTIONS, MODEL_OPTIONS } from "~/constants/options";
 
 export const meta: MetaFunction = () => {
   return [{ title: "Translate | Online Translation Tool" }];
@@ -33,10 +34,10 @@ export default function Index() {
   const { theme, setTheme } = useTheme();
   const { t, i18n } = useTranslation();
   const [currentLanguage, setCurrentLanguage] = useState("en");
-  const [sourceLang, setSourceLang] = useState("en");
-  const [targetLang, setTargetLang] = useState("zh");
+  const [sourceLang, setSourceLang] = useState("English");
+  const [targetLang, setTargetLang] = useState("Chinese");
   const [inputText, setInputText] = useState("");
-  const [model, setModel] = useState("GPT-4o");
+  const [model, setModel] = useState("gpt-4o");
   const [translatedText, setTranslatedText] = useState("");
   const [isCopied, setIsCopied] = useState(false);
   const fetcher = useFetcher<FetcherData>();
@@ -147,17 +148,24 @@ export default function Index() {
                     <SelectValue placeholder={t("selectSourceLang")} />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="en">{t("english")}</SelectItem>
-                    <SelectItem value="zh">{t("chinese")}</SelectItem>
+                    {LANGUAGE_OPTIONS.map((option) => (
+                      <SelectItem key={option.value} value={option.value}>
+                        {t(option.label)}
+                      </SelectItem>
+                    ))}
                   </SelectContent>
                 </Select>
+
                 <Select value={model} onValueChange={setModel}>
                   <SelectTrigger className="w-[140px]">
                     <SelectValue placeholder="Select model" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="GPT-4o">GPT-4o</SelectItem>
-                    <SelectItem value="GPT-4o-mini">GPT-4o mini</SelectItem>
+                    {MODEL_OPTIONS.map((option) => (
+                      <SelectItem key={option.value} value={option.value}>
+                        {option.label}
+                      </SelectItem>
+                    ))}
                   </SelectContent>
                 </Select>
               </div>
@@ -171,10 +179,12 @@ export default function Index() {
                 <Button
                   size="sm"
                   onClick={handleTranslate}
-                  disabled={fetcher.state === "submitting"}
+                  disabled={
+                    fetcher.state === "submitting" || inputText.trim() === ""
+                  }
                 >
                   {fetcher.state === "submitting" ? (
-                    "Translating..."
+                    t("translating")
                   ) : (
                     <>
                       {t("translateButton")}
@@ -210,8 +220,11 @@ export default function Index() {
                   <SelectValue placeholder={t("selectTargetLang")} />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="en">{t("english")}</SelectItem>
-                  <SelectItem value="zh">{t("chinese")}</SelectItem>
+                  {LANGUAGE_OPTIONS.map((option) => (
+                    <SelectItem key={option.value} value={option.value}>
+                      {t(option.label)}
+                    </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
               <Button variant="ghost" size="sm" onClick={handleCopy}>

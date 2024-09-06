@@ -16,6 +16,7 @@ const resources = {
       copy: "Copy",
       swapLanguages: "Swap languages",
       copied: "Copied",
+      translating: "Translating...",
     },
   },
   zh: {
@@ -31,6 +32,7 @@ const resources = {
       copy: "复制",
       swapLanguages: "互换语言",
       copied: "已复制",
+      translating: "翻译中...",
     },
   },
 };
