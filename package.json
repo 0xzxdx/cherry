@@ -13,6 +13,8 @@
     "typegen": "wrangler types"
   },
   "dependencies": {
+    "@radix-ui/react-icons": "^1.3.0",
+    "@radix-ui/react-select": "^2.1.1",
     "@radix-ui/react-slot": "^1.1.0",
     "@remix-run/cloudflare": "^2.11.2",
     "@remix-run/cloudflare-pages": "^2.11.2",
