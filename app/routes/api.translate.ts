@@ -39,7 +39,6 @@ export const action: ActionFunction = async ({ request, context }) => {
       return json({ error: "Missing required fields" }, { status: 400 });
     }
 
-    // 验证语言和模型选项
     if (
       !LANGUAGE_OPTIONS.some((option) => option.value === sourceLang) ||
       !LANGUAGE_OPTIONS.some((option) => option.value === targetLang) ||
@@ -51,15 +50,15 @@ export const action: ActionFunction = async ({ request, context }) => {
       );
     }
 
-    // const translatedText = await translateText(
-    //   context.cloudflare.env.GITHUB_TOKEN,
-    //   sourceText,
-    //   sourceLang,
-    //   targetLang,
-    //   model
-    // );
+    const translatedText = await translateText(
+      context.cloudflare.env.GITHUB_TOKEN,
+      sourceText,
+      sourceLang,
+      targetLang,
+      model
+    );
 
-    const response: TranslateResponse = { translatedText: sourceText };
+    const response: TranslateResponse = { translatedText };
     return json(response);
   } catch (error) {
     console.error("Translation error:", error);
