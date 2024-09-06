@@ -16,7 +16,8 @@ import {
 } from "@radix-ui/react-icons";
 import { useTheme } from "~/components/theme-provider";
 import { useTranslation } from "react-i18next";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useFetcher } from "@remix-run/react";
 
 export const meta: MetaFunction = () => {
   return [
@@ -28,6 +29,11 @@ export const meta: MetaFunction = () => {
   ];
 };
 
+type FetcherData = {
+  translatedText?: string;
+  error?: string;
+};
+
 export default function Index() {
   const { theme, setTheme } = useTheme();
   const { t, i18n } = useTranslation();
@@ -36,6 +42,8 @@ export default function Index() {
   const [targetLang, setTargetLang] = useState("zh");
   const [inputText, setInputText] = useState("");
   const [model, setModel] = useState("GPT-4o");
+  const [translatedText, setTranslatedText] = useState("");
+  const fetcher = useFetcher<FetcherData>();
 
   const toggleLanguage = () => {
     const newLang = currentLanguage === "en" ? "zh" : "en";
@@ -54,6 +62,32 @@ export default function Index() {
       setInputText(newText);
     }
   };
+
+  const handleTranslate = () => {
+    fetcher.submit(
+      JSON.stringify({
+        sourceLang,
+        sourceText: inputText,
+        targetLang,
+        model,
+      }),
+      {
+        method: "post",
+        action: "/api/translate",
+        encType: "application/json",
+      }
+    );
+  };
+
+  useEffect(() => {
+    if (fetcher.data) {
+      if (fetcher.data.translatedText) {
+        setTranslatedText(fetcher.data.translatedText);
+      } else if (fetcher.data.error) {
+        setTranslatedText(JSON.stringify(fetcher.data.error));
+      }
+    }
+  }, [fetcher.data]);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -104,7 +138,7 @@ export default function Index() {
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="GPT-4o">GPT-4o</SelectItem>
-                    <SelectItem value="GPT-4mini">GPT-4mini</SelectItem>
+                    <SelectItem value="GPT-4o-mini">GPT-4o mini</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -112,9 +146,19 @@ export default function Index() {
                 <Button variant="ghost" size="sm" onClick={swapLanguages}>
                   <WidthIcon className="h-4 w-4" />
                 </Button>
-                <Button size="sm">
-                  {t("translateButton")}
-                  <ArrowRightIcon className="ml-2 h-4 w-4" />
+                <Button
+                  size="sm"
+                  onClick={handleTranslate}
+                  disabled={fetcher.state === "submitting"}
+                >
+                  {fetcher.state === "submitting" ? (
+                    "Translating..."
+                  ) : (
+                    <>
+                      {t("translateButton")}
+                      <ArrowRightIcon className="ml-2 h-4 w-4" />
+                    </>
+                  )}
                 </Button>
               </div>
             </div>
@@ -155,6 +199,7 @@ export default function Index() {
             <Textarea
               className="min-h-[300px]"
               placeholder={t("outputPlaceholder")}
+              value={translatedText}
               readOnly
             />
           </div>
