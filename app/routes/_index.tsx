@@ -8,7 +8,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "~/components/ui/select";
-import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
+import {
+  MoonIcon,
+  SunIcon,
+  ArrowRightIcon,
+  WidthIcon,
+} from "@radix-ui/react-icons";
 import { useTheme } from "~/components/theme-provider";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
@@ -26,7 +31,11 @@ export const meta: MetaFunction = () => {
 export default function Index() {
   const { theme, setTheme } = useTheme();
   const { t, i18n } = useTranslation();
-  const [currentLanguage, setCurrentLanguage] = useState("en"); // 将初始值设置为 "en"
+  const [currentLanguage, setCurrentLanguage] = useState("en");
+  const [sourceLang, setSourceLang] = useState("en");
+  const [targetLang, setTargetLang] = useState("zh");
+  const [inputText, setInputText] = useState("");
+  const [model, setModel] = useState("GPT-4o");
 
   const toggleLanguage = () => {
     const newLang = currentLanguage === "en" ? "zh" : "en";
@@ -34,11 +43,28 @@ export default function Index() {
     setCurrentLanguage(newLang);
   };
 
+  const swapLanguages = () => {
+    setSourceLang(targetLang);
+    setTargetLang(sourceLang);
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const newText = e.target.value;
+    if (newText.length <= 5000) {
+      setInputText(newText);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <nav className="border-b">
         <div className="container mx-auto px-4 py-2 flex justify-between items-center">
-          <h1 className="text-xl font-bold">{t("translate")}</h1>
+          <Button
+            variant="link"
+            className="text-xl font-bold p-0 no-underline hover:no-underline"
+          >
+            {t("translate")}
+          </Button>
           <div className="flex items-center space-x-2">
             <Button variant="ghost" size="icon" onClick={toggleLanguage}>
               {currentLanguage === "en" ? "中" : "En"}
@@ -60,44 +86,78 @@ export default function Index() {
 
       <main className="container mx-auto p-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <Select>
-              <SelectTrigger className="w-full">
-                <SelectValue placeholder={t("selectSourceLang")} />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="en">{t("english")}</SelectItem>
-                <SelectItem value="zh">{t("chinese")}</SelectItem>
-              </SelectContent>
-            </Select>
+          <div className="border rounded-lg p-4">
+            <div className="flex justify-between items-center mb-2">
+              <div className="flex items-center space-x-2">
+                <Select value={sourceLang} onValueChange={setSourceLang}>
+                  <SelectTrigger className="w-[180px]">
+                    <SelectValue placeholder={t("selectSourceLang")} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="en">{t("english")}</SelectItem>
+                    <SelectItem value="zh">{t("chinese")}</SelectItem>
+                  </SelectContent>
+                </Select>
+                <Select value={model} onValueChange={setModel}>
+                  <SelectTrigger className="w-[140px]">
+                    <SelectValue placeholder="Select model" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="GPT-4o">GPT-4o</SelectItem>
+                    <SelectItem value="GPT-4mini">GPT-4mini</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="flex space-x-2">
+                <Button variant="ghost" size="sm" onClick={swapLanguages}>
+                  <WidthIcon className="h-4 w-4" />
+                </Button>
+                <Button size="sm">
+                  {t("translateButton")}
+                  <ArrowRightIcon className="ml-2 h-4 w-4" />
+                </Button>
+              </div>
+            </div>
             <Textarea
-              className="mt-2"
+              className="min-h-[300px]"
               placeholder={t("inputPlaceholder")}
-              rows={10}
+              value={inputText}
+              onChange={handleInputChange}
             />
+            <div className="flex justify-end items-center mt-2">
+              <span
+                className={`text-sm ${
+                  inputText.length === 5000
+                    ? "text-red-500"
+                    : "text-muted-foreground"
+                }`}
+              >
+                {inputText.length} / 5000
+              </span>
+            </div>
           </div>
 
-          <div>
-            <Select>
-              <SelectTrigger className="w-full">
-                <SelectValue placeholder={t("selectTargetLang")} />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="en">{t("english")}</SelectItem>
-                <SelectItem value="zh">{t("chinese")}</SelectItem>
-              </SelectContent>
-            </Select>
+          <div className="border rounded-lg p-4">
+            <div className="flex justify-between items-center mb-2">
+              <Select value={targetLang} onValueChange={setTargetLang}>
+                <SelectTrigger className="w-[180px]">
+                  <SelectValue placeholder={t("selectTargetLang")} />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="en">{t("english")}</SelectItem>
+                  <SelectItem value="zh">{t("chinese")}</SelectItem>
+                </SelectContent>
+              </Select>
+              <Button variant="ghost" size="sm">
+                {t("copy")}
+              </Button>
+            </div>
             <Textarea
-              className="mt-2"
+              className="min-h-[300px]"
               placeholder={t("outputPlaceholder")}
-              rows={10}
               readOnly
             />
           </div>
-        </div>
-
-        <div className="mt-4 text-center">
-          <Button>{t("translateButton")}</Button>
         </div>
       </main>
     </div>

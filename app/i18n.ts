@@ -15,6 +15,8 @@ const resources = {
       translateButton: "Translate",
       english: "English",
       chinese: "Chinese",
+      copy: "Copy",
+      swapLanguages: "Swap languages",
     },
   },
   zh: {
@@ -29,6 +31,8 @@ const resources = {
       translateButton: "翻译",
       english: "英语",
       chinese: "中文",
+      copy: "复制",
+      swapLanguages: "互换语言",
     },
   },
 };
