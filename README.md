@@ -4,6 +4,13 @@
 
 ## Development
 
+Set vars
+
+```sh
+$ vim .dev.vars
+GITHUB_TOKEN=""
+```
+
 Run the dev server:
 
 ```sh
