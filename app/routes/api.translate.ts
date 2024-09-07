@@ -1,11 +1,11 @@
 import { ActionFunction, json } from "@remix-run/cloudflare";
-import { translateText } from "../utils/openai-client";
+import { translateText } from "~/lib/openai-client";
 import {
   LANGUAGE_OPTIONS,
   MODEL_OPTIONS,
   LanguageCode,
   ModelCode,
-} from "~/constants/options";
+} from "~/lib/constants";
 import type { TranslateResponse } from "~/types/translate";
 
 type TranslateRequest = {

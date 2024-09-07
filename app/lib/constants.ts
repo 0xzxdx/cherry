@@ -16,3 +16,5 @@ export const DESCRIPTION =
   "Cherry Translate is an advanced AI-powered translation tool that offers fast, accurate, and context-aware translations across multiple languages. Elevate your communication with the power of artificial intelligence, ensuring smooth and precise translations.";
 export const KEYWORDS =
   "AI translation tool,Online translation tool,Cherry Translate,AI-powered translator,Real-time translation,Accurate translation service,Free online translator,Multilingual translation,Translate with AI,Context-aware translations,Language translation tool,AI-based translation platform";
+
+export const GITHUB_REPO_URL = "https://github.com/0xzxdx/cherry";

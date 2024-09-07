@@ -1,5 +1,5 @@
 import { ActionFunction, json } from "@remix-run/cloudflare";
-import { themeCookie } from "~/utils/theme.server";
+import { themeCookie } from "~/lib/theme";
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();

@@ -2,7 +2,8 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { MoonIcon, SunIcon, GitHubLogoIcon } from "@radix-ui/react-icons";
 import { Button } from "~/components/ui/button";
-import { useTheme } from "~/components/theme-provider";
+import { useTheme } from "~/components/ThemeProvider";
+import { GITHUB_REPO_URL } from "~/lib/constants";
 
 export default function Navbar({}) {
   const { theme, setTheme } = useTheme();
@@ -26,7 +27,7 @@ export default function Navbar({}) {
         </Button>
         <div className="flex items-center space-x-2">
           <Button variant="ghost" size="icon" asChild>
-            <a href="https://github.com/0xzxdx/cherry" target="_blank">
+            <a href={GITHUB_REPO_URL} target="_blank">
               <GitHubLogoIcon className="h-5 w-5" />
             </a>
           </Button>

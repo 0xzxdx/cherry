@@ -10,7 +10,7 @@ import {
 } from "~/components/ui/select";
 import { ClipboardIcon } from "@radix-ui/react-icons";
 import { useTranslation } from "react-i18next";
-import { LANGUAGE_OPTIONS } from "~/constants/options";
+import { LANGUAGE_OPTIONS } from "~/lib/constants";
 
 type TranslationOutputProps = {
   targetLang: string;

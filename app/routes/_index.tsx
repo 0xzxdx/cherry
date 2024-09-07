@@ -1,7 +1,7 @@
 import type { MetaFunction } from "@remix-run/cloudflare";
 import { useState, useEffect } from "react";
 import { useFetcher } from "@remix-run/react";
-import { TITLE, DESCRIPTION, KEYWORDS } from "~/constants/options";
+import { TITLE, DESCRIPTION, KEYWORDS } from "~/lib/constants";
 import Navbar from "~/components/Navbar";
 import TranslationInput from "~/components/TranslationInput";
 import TranslationOutput from "~/components/TranslationOutput";

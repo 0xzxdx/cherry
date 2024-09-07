@@ -8,23 +8,19 @@ import {
   useLoaderData,
 } from "@remix-run/react";
 import { LinksFunction, LoaderFunction, json } from "@remix-run/cloudflare";
-import { ThemeProvider } from "~/components/theme-provider";
-import styles from "./tailwind.css?url";
-import { getThemeFromCookie } from "~/utils/theme.server";
-import type { Theme } from "~/types/theme";
-import i18n from "./i18n";
 import { I18nextProvider } from "react-i18next";
+import { ThemeProvider } from "~/components/ThemeProvider";
+import styles from "./tailwind.css?url";
+import { getThemeFromCookie } from "~/lib/theme";
+import { Settings } from "~/types/settings";
+import { Theme } from "~/types/theme";
+import i18n from "~/lib/i18n";
 
 export const links: LinksFunction = () => [{ rel: "stylesheet", href: styles }];
 
-type LoaderData = {
-  theme: Theme;
-  language: string;
-};
-
 export const loader: LoaderFunction = async ({ request }) => {
   const theme = await getThemeFromCookie(request);
-  return json<LoaderData>({ theme: theme as Theme, language: "en" });
+  return json<Settings>({ theme: theme as Theme, language: "en" });
 };
 
 function Document({
@@ -52,7 +48,7 @@ function Document({
 }
 
 export function Layout() {
-  const data = useLoaderData<LoaderData>();
+  const data = useLoaderData<Settings>();
 
   useEffect(() => {
     if (typeof window !== "undefined") {
