@@ -6,16 +6,13 @@ import {
   LanguageCode,
   ModelCode,
 } from "~/constants/options";
+import type { TranslateResponse } from "~/types/translate";
 
 type TranslateRequest = {
   sourceLang: LanguageCode;
   sourceText: string;
   targetLang: LanguageCode;
   model: ModelCode;
-};
-
-type TranslateResponse = {
-  translatedText: string;
 };
 
 export const action: ActionFunction = async ({ request, context }) => {
