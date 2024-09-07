@@ -20,21 +20,19 @@ import { useTheme } from "~/components/theme-provider";
 import { useTranslation } from "react-i18next";
 import { useState, useEffect } from "react";
 import { useFetcher } from "@remix-run/react";
-import { LANGUAGE_OPTIONS, MODEL_OPTIONS } from "~/constants/options";
+import {
+  LANGUAGE_OPTIONS,
+  MODEL_OPTIONS,
+  TITLE,
+  DESCRIPTION,
+  KEYWORDS,
+} from "~/constants/options";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "Cherry Translate | AI-Powered Online Translation Tool" },
-    {
-      name: "description",
-      content:
-        "Cherry Translate is an advanced AI-powered translation tool that offers fast, accurate, and context-aware translations across multiple languages. Elevate your communication with the power of artificial intelligence, ensuring smooth and precise translations.",
-    },
-    {
-      name: "keywords",
-      content:
-        "AI translation tool,Online translation tool,Cherry Translate,AI-powered translator,Real-time translation,Accurate translation service,Free online translator,Multilingual translation,Translate with AI,Context-aware translations,Language translation tool,AI-based translation platform",
-    },
+    { title: TITLE },
+    { name: "description", content: DESCRIPTION },
+    { name: "keywords", content: KEYWORDS },
   ];
 };
 
