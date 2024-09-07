@@ -5,7 +5,7 @@ import LanguageDetector from "i18next-browser-languagedetector";
 const resources = {
   en: {
     translation: {
-      translate: "Translate",
+      translate: "Cherry Translate",
       selectSourceLang: "Select source language",
       selectTargetLang: "Select target language",
       inputPlaceholder: "Enter text to translate",
@@ -21,7 +21,7 @@ const resources = {
   },
   zh: {
     translation: {
-      translate: "翻译",
+      translate: "樱桃翻译",
       selectSourceLang: "选择源语言",
       selectTargetLang: "选择目标语言",
       inputPlaceholder: "在此输入要翻译的文本",

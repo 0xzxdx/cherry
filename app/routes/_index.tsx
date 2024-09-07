@@ -14,6 +14,7 @@ import {
   ArrowRightIcon,
   WidthIcon,
   ClipboardIcon,
+  GitHubLogoIcon,
 } from "@radix-ui/react-icons";
 import { useTheme } from "~/components/theme-provider";
 import { useTranslation } from "react-i18next";
@@ -22,7 +23,19 @@ import { useFetcher } from "@remix-run/react";
 import { LANGUAGE_OPTIONS, MODEL_OPTIONS } from "~/constants/options";
 
 export const meta: MetaFunction = () => {
-  return [{ title: "Translate | Online Translation Tool" }];
+  return [
+    { title: "Cherry Translate | AI-Powered Online Translation Tool" },
+    {
+      name: "description",
+      content:
+        "Cherry Translate is an advanced AI-powered translation tool that offers fast, accurate, and context-aware translations across multiple languages. Elevate your communication with the power of artificial intelligence, ensuring smooth and precise translations.",
+    },
+    {
+      name: "keywords",
+      content:
+        "AI translation tool,Online translation tool,Cherry Translate,AI-powered translator,Real-time translation,Accurate translation service,Free online translator,Multilingual translation,Translate with AI,Context-aware translations,Language translation tool,AI-based translation platform",
+    },
+  ];
 };
 
 type FetcherData = {
@@ -120,6 +133,15 @@ export default function Index() {
             {t("translate")}
           </Button>
           <div className="flex items-center space-x-2">
+            <Button variant="ghost" size="icon" asChild>
+              <a
+                href="https://github.com/0xzxdx/cherry"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <GitHubLogoIcon className="h-5 w-5" />
+              </a>
+            </Button>
             <Button variant="ghost" size="icon" onClick={toggleLanguage}>
               {currentLanguage === "en" ? "中" : "En"}
             </Button>
@@ -139,12 +161,12 @@ export default function Index() {
       </nav>
 
       <main className="container mx-auto p-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <div className="border rounded-lg p-4">
-            <div className="flex justify-between items-center mb-2">
-              <div className="flex items-center space-x-2">
+            <div className="flex flex-col space-y-2 sm:flex-row sm:justify-between sm:items-center mb-2">
+              <div className="flex flex-wrap items-center gap-2">
                 <Select value={sourceLang} onValueChange={setSourceLang}>
-                  <SelectTrigger className="w-[180px]">
+                  <SelectTrigger className="w-full sm:w-[180px]">
                     <SelectValue placeholder={t("selectSourceLang")} />
                   </SelectTrigger>
                   <SelectContent>
@@ -157,7 +179,7 @@ export default function Index() {
                 </Select>
 
                 <Select value={model} onValueChange={setModel}>
-                  <SelectTrigger className="w-[140px]">
+                  <SelectTrigger className="w-full sm:w-[140px]">
                     <SelectValue placeholder="Select model" />
                   </SelectTrigger>
                   <SelectContent>
@@ -169,7 +191,7 @@ export default function Index() {
                   </SelectContent>
                 </Select>
               </div>
-              <div className="flex space-x-2">
+              <div className="flex justify-end space-x-2">
                 <Button variant="ghost" size="sm" onClick={handlePaste}>
                   <ClipboardIcon className="h-4 w-4" />
                 </Button>
@@ -195,7 +217,7 @@ export default function Index() {
               </div>
             </div>
             <Textarea
-              className="min-h-[300px]"
+              className="min-h-[200px] sm:min-h-[300px]"
               placeholder={t("inputPlaceholder")}
               value={inputText}
               onChange={handleInputChange}
@@ -214,9 +236,9 @@ export default function Index() {
           </div>
 
           <div className="border rounded-lg p-4">
-            <div className="flex justify-between items-center mb-2">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-2">
               <Select value={targetLang} onValueChange={setTargetLang}>
-                <SelectTrigger className="w-[180px]">
+                <SelectTrigger className="w-full sm:w-[180px] mb-2 sm:mb-0">
                   <SelectValue placeholder={t("selectTargetLang")} />
                 </SelectTrigger>
                 <SelectContent>
@@ -228,12 +250,12 @@ export default function Index() {
                 </SelectContent>
               </Select>
               <Button variant="ghost" size="sm" onClick={handleCopy}>
-                {isCopied ?? <ClipboardIcon className="h-4 w-4 mr-2" />}
+                {isCopied ? <ClipboardIcon className="h-4 w-4 mr-2" /> : null}
                 {isCopied ? t("copied") : t("copy")}
               </Button>
             </div>
             <Textarea
-              className="min-h-[300px]"
+              className="min-h-[200px] sm:min-h-[300px]"
               placeholder={t("outputPlaceholder")}
               value={translatedText}
               readOnly
