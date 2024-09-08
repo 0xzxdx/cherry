@@ -1,19 +1,23 @@
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { MoonIcon, SunIcon, GitHubLogoIcon } from "@radix-ui/react-icons";
 import { Button } from "~/components/ui/button";
 import { useTheme } from "~/components/ThemeProvider";
 import { GITHUB_REPO_URL } from "~/lib/constants";
+import { useNavigate, useLocation } from "@remix-run/react";
+import { getLanguageFromPath } from "~/lib/utils";
 
-export default function Navbar({}) {
+export default function Navbar() {
   const { theme, setTheme } = useTheme();
   const { t, i18n } = useTranslation();
-  const [currentLanguage, setCurrentLanguage] = useState("en");
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const toggleLanguage = () => {
-    const newLang = currentLanguage === "en" ? "zh" : "en";
+    const currentLang = getLanguageFromPath(location.pathname);
+    const newLang = currentLang === "en" ? "zh" : "en";
+    const newPath = currentLang === "en" ? "/zh" : "/";
     i18n.changeLanguage(newLang);
-    setCurrentLanguage(newLang);
+    navigate(newPath);
   };
 
   return (
@@ -32,7 +36,7 @@ export default function Navbar({}) {
             </a>
           </Button>
           <Button variant="ghost" size="icon" onClick={toggleLanguage}>
-            {currentLanguage === "en" ? "中" : "En"}
+            {i18n.language === "en" ? "中" : "En"}
           </Button>
           <Button
             variant="ghost"
