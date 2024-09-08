@@ -17,6 +17,11 @@ const resources = {
       swapLanguages: "Swap languages",
       copied: "Copied",
       translating: "Translating...",
+      title: "Cherry Translate | AI-Powered Online Translation Tool",
+      description:
+        "Cherry Translate is an advanced AI-powered translation tool that offers fast, accurate, and context-aware translations across multiple languages. Elevate your communication with the power of artificial intelligence, ensuring smooth and precise translations.",
+      keywords:
+        "AI translation tool,Online translation tool,Cherry Translate,AI-powered translator,Real-time translation,Accurate translation service,Free online translator,Multilingual translation,Translate with AI,Context-aware translations,Language translation tool,AI-based translation platform",
     },
   },
   zh: {
@@ -33,6 +38,11 @@ const resources = {
       swapLanguages: "互换语言",
       copied: "已复制",
       translating: "翻译中...",
+      title: "樱桃翻译 | AI驱动的在线翻译工具",
+      description:
+        "樱桃翻译是一款先进的AI驱动翻译工具，提供快速、准确和上下文感知的多语言翻译。借助人工智能的力量提升您的沟通，确保流畅精准的翻译。",
+      keywords:
+        "AI翻译工具,在线翻译工具,樱桃翻译,AI驱动翻译器,实时翻译,准确翻译服务,免费在线翻译器,多语言翻译,AI翻译,上下文感知翻译,语言翻译工具,AI翻译平台",
     },
   },
 };

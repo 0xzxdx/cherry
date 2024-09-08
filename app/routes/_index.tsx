@@ -1,17 +1,20 @@
 import type { MetaFunction } from "@remix-run/cloudflare";
 import { useState, useEffect } from "react";
 import { useFetcher } from "@remix-run/react";
-import { TITLE, DESCRIPTION, KEYWORDS } from "~/lib/constants";
+import { useTranslation } from "react-i18next";
 import Navbar from "~/components/Navbar";
 import TranslationInput from "~/components/TranslationInput";
 import TranslationOutput from "~/components/TranslationOutput";
 import type { TranslateResponse } from "~/types/translate";
 
-export const meta: MetaFunction = () => [
-  { title: TITLE },
-  { name: "description", content: DESCRIPTION },
-  { name: "keywords", content: KEYWORDS },
-];
+export const meta: MetaFunction = () => {
+  const { t } = useTranslation();
+  return [
+    { title: t("title") },
+    { name: "description", content: t("description") },
+    { name: "keywords", content: t("keywords") },
+  ];
+};
 
 export default function Index() {
   const [sourceLang, setSourceLang] = useState("English");
