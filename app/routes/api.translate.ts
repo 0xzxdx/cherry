@@ -48,7 +48,8 @@ export const action: ActionFunction = async ({ request, context }) => {
     }
 
     const translatedText = await translateText(
-      context.cloudflare.env.GITHUB_TOKEN,
+      context.cloudflare.env.OPENAI_API_KEY,
+      context.cloudflare.env.OPENAI_BASE_URL,
       sourceText,
       sourceLang,
       targetLang,

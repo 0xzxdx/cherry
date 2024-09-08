@@ -8,7 +8,8 @@ Set vars
 
 ```sh
 $ vim .dev.vars
-GITHUB_TOKEN=""
+OPENAI_BASE_URL="https://models.inference.ai.azure.com" # Azure OpenAI Base URL
+OPENAI_API_KEY=""
 ```
 
 Run the dev server:

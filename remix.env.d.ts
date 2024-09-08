@@ -7,7 +7,8 @@ declare module "@remix-run/server-runtime" {
   export interface AppLoadContext extends OriginalAppLoadContext {
     cloudflare: {
       env: {
-        GITHUB_TOKEN: string;
+        OPENAI_BASE_URL: string;
+        OPENAI_API_KEY: string;
       };
     };
   }

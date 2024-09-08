@@ -1,22 +1,21 @@
 import OpenAI from "openai";
 
-const endpoint = "https://models.inference.ai.azure.com";
-
-export function createOpenAIClient(GITHUB_TOKEN?: string) {
-  if (!GITHUB_TOKEN) {
-    throw new Error("GITHUB_TOKEN is not set");
+export function createOpenAIClient(base_url?: string, api_key?: string) {
+  if (!base_url || !api_key) {
+    throw new Error("OPENAI_BASE_URL or OPENAI_API_KEY is not set");
   }
-  return new OpenAI({ baseURL: endpoint, apiKey: GITHUB_TOKEN });
+  return new OpenAI({ baseURL: base_url, apiKey: api_key });
 }
 
 export async function translateText(
-  GITHUB_TOKEN: string,
+  api_key: string,
+  base_url: string,
   sourceText: string,
   sourceLang: string,
   targetLang: string,
   model: string
 ): Promise<string> {
-  const client = createOpenAIClient(GITHUB_TOKEN);
+  const client = createOpenAIClient(base_url, api_key);
   try {
     const response = await client.chat.completions.create({
       messages: [
