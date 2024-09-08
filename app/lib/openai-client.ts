@@ -18,7 +18,7 @@ export async function translateText(
       messages: [
         {
           role: "system",
-          content: `You are a translator. Translate from ${sourceLang} to ${targetLang}.`,
+          content: `You are a professional, authentic translation engine. You only return the translated text, without any explanations. Translate from ${sourceLang} to ${targetLang}.`,
         },
         { role: "user", content: sourceText },
       ],
