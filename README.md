@@ -17,3 +17,23 @@ Run the dev server:
 ```sh
 npm run dev
 ```
+
+## Deployment For Docker compose
+
+```bash
+$ mkdir ~/deploy/cherry
+$ cd ~/deploy/cherry
+$ vim docker-compose.yml
+services:
+
+  cherry:
+    image: ghcr.io/0xzxdx/cherry:latest
+    container_name: cherry
+    restart: always
+    network_mode: host
+    environment:
+      OPENAI_BASE_URL: "https://models.inference.ai.azure.com" # Please set to your OpenAI Base URL
+      OPENAI_API_KEY: "" # Please set to your OpenAI API Key
+$ docker compose up -d
+$ docker compose logs -f
+```
