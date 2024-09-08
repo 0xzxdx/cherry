@@ -3,7 +3,7 @@ import { useLocation, Outlet, useLoaderData } from "@remix-run/react";
 import { I18nextProvider } from "react-i18next";
 import { ThemeProvider } from "~/components/ThemeProvider";
 import { Document } from "~/components/Document";
-import { Settings } from "~/types/settings";
+import { Settings } from "~/lib/types";
 import i18n from "~/lib/i18n";
 import { getLanguageFromPath } from "~/lib/utils";
 

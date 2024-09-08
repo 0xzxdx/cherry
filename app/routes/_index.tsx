@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import Navbar from "~/components/Navbar";
 import TranslationInput from "~/components/TranslationInput";
 import TranslationOutput from "~/components/TranslationOutput";
-import type { TranslateResponse } from "~/types/translate";
+import type { TranslateResponse } from "~/lib/types";
 
 export const meta: MetaFunction = () => {
   const { t } = useTranslation();

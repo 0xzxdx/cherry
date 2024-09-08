@@ -1,5 +1,5 @@
 import { Links, Meta, Scripts, ScrollRestoration } from "@remix-run/react";
-import { Theme } from "~/types/theme";
+import { Theme } from "~/lib/types";
 
 interface DocumentProps {
   children: React.ReactNode;

@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useFetcher } from "@remix-run/react";
-import type { Theme } from "~/types/theme";
+import type { Theme } from "~/lib/types";
 
 type ThemeProviderProps = {
   children: React.ReactNode;

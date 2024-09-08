@@ -6,7 +6,7 @@ import {
   LanguageCode,
   ModelCode,
 } from "~/lib/constants";
-import type { TranslateResponse } from "~/types/translate";
+import type { TranslateResponse } from "~/lib/types";
 
 type TranslateRequest = {
   sourceLang: LanguageCode;
