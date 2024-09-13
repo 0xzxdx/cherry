@@ -14,8 +14,8 @@ export default function Navbar() {
 
   const toggleLanguage = () => {
     const currentLang = getLanguageFromPath(location.pathname);
-    const newLang = currentLang === "en" ? "zh" : "en";
-    const newPath = currentLang === "en" ? "/zh" : "/";
+    const newLang = currentLang === "en" ? "zh-CN" : "en";
+    const newPath = currentLang === "en" ? "/zh-CN" : "/";
     i18n.changeLanguage(newLang);
     navigate(newPath);
   };

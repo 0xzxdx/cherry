@@ -6,7 +6,7 @@ export default {
   outputPlaceholder: "Translation will appear here",
   translateButton: "Translate",
   english: "English",
-  chinese: "Chinese",
+  chinese: "Chinese (Simplified)",
   copy: "Copy",
   swapLanguages: "Swap languages",
   copied: "Copied",

@@ -6,7 +6,7 @@ export default {
   outputPlaceholder: "翻译结果将显示在这里",
   translateButton: "翻译",
   english: "英语",
-  chinese: "中文",
+  chinese: "中文简体",
   copy: "复制",
   swapLanguages: "互换语言",
   copied: "已复制",

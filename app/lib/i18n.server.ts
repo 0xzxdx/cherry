@@ -13,10 +13,10 @@ const i18nServer = new RemixI18Next({
   },
 });
 
-// Rewrite the `getLocale` method to address the issue with the /zh and /en paths.
+// Rewrite the `getLocale` method to address the issue with the /zh-CN and /en paths.
 i18nServer.getLocale = async (request: Request): Promise<string> => {
-  if (request.url.endsWith("/zh")) {
-    return "zh";
+  if (request.url.endsWith("/zh-CN")) {
+    return "zh-CN";
   }
   return i18n.fallbackLng;
 };

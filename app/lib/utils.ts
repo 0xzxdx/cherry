@@ -8,7 +8,7 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export const getLanguageFromPath = (path: string) => {
-  return path.startsWith("/zh") ? "zh" : "en";
+  return path.startsWith("/zh-CN") ? "zh-CN" : "en";
 };
 
 export const themeCookie = createCookie("theme", {
