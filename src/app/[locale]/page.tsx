@@ -28,6 +28,11 @@ export default function HomePage() {
     },
   });
 
+  const swapLanguages = () => {
+    setSourceLang(targetLang);
+    setTargetLang(sourceLang);
+  };
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Navbar />
@@ -48,7 +53,7 @@ export default function HomePage() {
                 model,
               })
             }
-            swapLanguages={() => {}}
+            swapLanguages={swapLanguages}
             isPending={handleTranslate.isPending}
           />
 
